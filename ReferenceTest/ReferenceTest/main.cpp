@@ -1,5 +1,9 @@
 #include "iostream"
 #include "vector"
+#include "log4cxx/logger.h"
+#include "log4cxx/propertyconfigurator.h"
+
+using namespace log4cxx;
 using namespace std;
 
 class VectorRef
@@ -51,7 +55,13 @@ void TestVecInts()
 
 void main()
 {
-	TestVecInts();
+	log4cxx::PropertyConfigurator::configure("./log4cxx/log4cxx.properties");//º”‘ÿ»’÷æ≈‰÷√
+
+	for (int i = 0; i < 500; i++)
+	{
+		LOG4CXX_INFO(log4cxx::Logger::getLogger("hello"), i);
+	}
+	//TestVecInts();
 	getchar();
 	return;
 }
