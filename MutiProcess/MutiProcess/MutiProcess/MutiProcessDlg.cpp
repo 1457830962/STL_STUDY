@@ -6,6 +6,10 @@
 #include "MutiProcess.h"
 #include "MutiProcessDlg.h"
 #include "afxdialogex.h"
+#include "log4cxx/logger.h"
+#include "log4cxx/propertyconfigurator.h"
+
+using namespace log4cxx;
 
 
 #ifdef _DEBUG
@@ -90,6 +94,8 @@ BOOL CMutiProcessDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
+	log4cxx::PropertyConfigurator::configure("./log4cxx/log4cxx(everyday).properties");//加载日志配置
+	   	 
 	// 将“关于...”菜单项添加到系统菜单中。
 
 	// IDM_ABOUTBOX 必须在系统命令范围内。

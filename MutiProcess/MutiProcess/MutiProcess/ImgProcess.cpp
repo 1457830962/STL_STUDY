@@ -2,7 +2,9 @@
 #include "MutiProcess.h"
 #include "ImgProcess.h"
 #include "MutiProcessDlg.h"
-
+#include "log4cxx/logger.h"
+#include "log4cxx/propertyconfigurator.h"
+using namespace log4cxx;
 CImgProcess::CImgProcess(CMutiProcessDlg* pCMutiProcessDlg)
 {
 	this->pCMutiProcessDlg = pCMutiProcessDlg;
@@ -65,7 +67,7 @@ BOOL CImgProcess::Init()
 
 void CImgProcess::Start()
 {
-	TRACE("Start Threads.\n");
+	LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::Start"), "Start Threads.");
 	// 启动
 	for (BYTE i = 0; i < THREAD_CNT; i++)
 		SetEvent(m_staThdPara[i].hStart);
@@ -73,7 +75,7 @@ void CImgProcess::Start()
 
 void CImgProcess::Pause()
 {
-	TRACE("Pause Threads.\n");
+	LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::Pause()"), "Pause Threads.");
 	//暂停
 	for (BYTE i = 0; i < THREAD_CNT; i++)
 		ResetEvent(m_staThdPara[i].hStart);
@@ -109,7 +111,7 @@ void CImgProcess::Exit()
 	for (BYTE i = 0; i < THREAD_CNT; i++)
 		ReleasePoint(m_staProcData[i].p);  // 原始图像
 
-	TRACE("Exit Threads.\n");
+	LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::Exit()"), "Exit Threads.");
 }
 
 UINT CImgProcess::ThdGetDataProc(LPVOID lpVoid)
@@ -118,8 +120,7 @@ UINT CImgProcess::ThdGetDataProc(LPVOID lpVoid)
 	while (true)
 	{
 		// 稍等
-		Sleep(SLEEP_TIME);
-		TRACE("-------0-------------------size=%d\n", pImgProc->m_staThdPara[THREAD_GETDATA].dqCache.size());
+		Sleep(SLEEP_TIME);		
 		// 等待启动事件
 		//TRACE("ThdGetDataProc.等待启动事件\n");
 		WaitForSingleObject(pImgProc->m_staThdPara[THREAD_GETDATA].hStart, INFINITE);
@@ -150,6 +151,7 @@ UINT CImgProcess::ThdGetDataProc(LPVOID lpVoid)
 		pImgProc->m_staThdPara[THREAD_GETDATA].dqCache.pop_back();
 		LeaveCriticalSection(&pImgProc->m_staThdPara[THREAD_GETDATA].crtDqOp);
 
+		LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::ThdGetDataProc() has data"), *(pstProcData->p));
 		// 获取数据
 		pImgProc->GetData(pstProcData);
 		
@@ -162,6 +164,7 @@ UINT CImgProcess::ThdGetDataProc(LPVOID lpVoid)
 
 	// 表明已退出
 	TRACE("ThdGetDataProc has exited.\n");
+	LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::ThdGetDataProc  "), "ThdGetDataProc has exited");
 	SetEvent(pImgProc->m_staThdPara[THREAD_GETDATA].hHasExit);
 	return 0;
 }
@@ -173,7 +176,7 @@ UINT CImgProcess::ThdImgProProc(LPVOID lpVoid)
 	{
 		// 稍等
 		Sleep(SLEEP_TIME);
-		TRACE("-----1----size=%d\n", pImgProc->m_staThdPara[THREAD_IMGPROC].dqCache.size());
+		
 		// 等待启动事件
 		WaitForSingleObject(pImgProc->m_staThdPara[THREAD_IMGPROC].hStart, INFINITE);
 
@@ -194,20 +197,8 @@ UINT CImgProcess::ThdImgProProc(LPVOID lpVoid)
 		pImgProc->m_staThdPara[THREAD_IMGPROC].dqCache.pop_back();
 		LeaveCriticalSection(&pImgProc->m_staThdPara[THREAD_IMGPROC].crtDqOp);
 
-		TRACE("------------------IMG Processing start\n" );
 		*(pstProcData->p)=*(pstProcData->p) * 2;
-		//Sleep(500);
-		TRACE("------------------IMG Processing end\n");
-		TRACE("pro data=%d\n", *(pstProcData->p));
-		// 图像处理
-		//{
-		//	// 设置边缘检测内存结构
-		//	{
-		//		pImgProc->m_stEdgeDetect.lpRGB = pstProcData->lpRGB;
-		//		pImgProc->m_stEdgeDetect.pbyEgDtc = pstProcData->pbyBufA;
-		//		pImgProc->m_stEdgeDetect.pbyFilte = pstProcData->lpMask;
-		//	}
-		//}
+		LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::ThdImgProProc   process data is "), *(pstProcData->p));
 
 		// 该帧压入 更新视图 队列中
 		EnterCriticalSection(&pImgProc->m_staThdPara[THREAD_UPDATAVIEW].crtDqOp);
@@ -217,6 +208,7 @@ UINT CImgProcess::ThdImgProProc(LPVOID lpVoid)
 
 	// 表明已退出
 	TRACE("THREAD_IMGPROC has exited.\n");
+	LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::ThdImgProProc "), "THREAD_IMGPROC has exited.");
 	SetEvent(pImgProc->m_staThdPara[THREAD_IMGPROC].hHasExit);
 
 	// 结束
@@ -230,7 +222,7 @@ UINT CImgProcess::ThdUpdataViewProc(LPVOID lpVoid)
 	{
 		// 稍等
 		Sleep(SLEEP_TIME);
-		TRACE("-----2----size=%d\n", pImgProc->m_staThdPara[THREAD_UPDATAVIEW].dqCache.size());
+
 		// 等待启动事件
 		WaitForSingleObject(pImgProc->m_staThdPara[THREAD_UPDATAVIEW].hStart, INFINITE);
 
@@ -251,18 +243,7 @@ UINT CImgProcess::ThdUpdataViewProc(LPVOID lpVoid)
 		pImgProc->m_staThdPara[THREAD_UPDATAVIEW].dqCache.pop_back();
 		LeaveCriticalSection(&pImgProc->m_staThdPara[THREAD_UPDATAVIEW].crtDqOp);
 
-		// 更新界面
-		// 如果窗口可见，就刷新显示
-		//if (pImgProc->m_pEffectWnd->IsWindowVisible())
-		//{
-		//	pImgProc->m_pEffectWnd->RefreshData(pstProcData);
-		//}
-		//// 如果不可见，将标志设为不捕获
-		//else if (!pImgProc->m_pMainWnd->IsIconic())
-		//{
-		//	// 显示关闭
-		//	pImgProc->m_pMainWnd->OnTbDirectShow();
-		//}
+		LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::ThdUpdataViewProc "), *(pstProcData->p));
 		pImgProc->pCMutiProcessDlg->m_result = *(pstProcData->p);
 
 		// 该帧压入 获取数据 队列中
@@ -273,6 +254,7 @@ UINT CImgProcess::ThdUpdataViewProc(LPVOID lpVoid)
 
 	// 表明已退出
 	TRACE("ThdUpdataViewProc has exited.\n");
+	LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::ThdUpdataViewProc "), "ThdUpdataViewProc has exited.");
 	SetEvent(pImgProc->m_staThdPara[THREAD_UPDATAVIEW].hHasExit);
 
 	// 结束
@@ -282,7 +264,6 @@ UINT CImgProcess::ThdUpdataViewProc(LPVOID lpVoid)
 BOOL CImgProcess::GetData(PST_PROC_DATA pstProcData)
 {
 	*(pstProcData->p) = pCMutiProcessDlg->m_push_data;
-	TRACE("push data=%d\n", *(pstProcData->p));
 	return TRUE;
 }
 
