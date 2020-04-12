@@ -131,7 +131,7 @@ UINT CImgProcess::ThdGetDataProc(LPVOID lpVoid)
 			break;
 
 		
-
+		LOG4CXX_INFO(log4cxx::Logger::getLogger("CImgProcess::ThdGetDataProc() check the deque size"), pImgProc->m_staThdPara[THREAD_GETDATA].dqCache.size());//如果帧率过高会导致丢帧（所以实际当中要保证size大小始终不能为0）
 		// 检查数据事件，如果没有则继续
 		//TRACE("ThdGetDataProc.检查数据事件，如果没有则继续\n");
 		if (::WaitForSingleObject(pImgProc->m_hHasData, MAX_WAIT_DATA_TIME) != WAIT_OBJECT_0)
