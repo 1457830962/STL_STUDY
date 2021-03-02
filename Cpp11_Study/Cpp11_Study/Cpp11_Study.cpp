@@ -21,24 +21,22 @@ int main()
     }
     //wp是弱类型的智能指针，不影响所指向对象的生命周期，
     //这里p已经析构，其所指的对象也析构了，因此输出是0
-    cout << "use_count: " << wp.use_count() << endl;
 
-    int count = 0;
-
-    int x = 9999;
-
-    while (x){   
-        count++;
-        x = x & (x - 1);
-    }
-
-
+    /******************************判断文件是否存在测试*****************************************/
     std::string strExpiryDateFile = "D:\\Github\\STUDY_EVERYDAY\\Cpp11_Study\\Cpp11_Study\\Cpp11_Study.cpp";
     //判断文件是否存在 
-    if (FileMgr::FileExist(strExpiryDateFile))
-        MessageBoxA(::GetActiveWindow(), "有效期文件存在!", "提示", MB_OK | MB_ICONERROR);
-    else
+    if (!FileMgr::FileExist(strExpiryDateFile))
         MessageBoxA(::GetActiveWindow(), "有效期文件不存在!", "提示", MB_OK | MB_ICONERROR);
+    /**********************************************************************************************/
+
+
+    /******************************注册表创建 获取测试*****************************************/
+    std::string strCompanyName = "英语";
+    std::string strEnglishCompanyName = "english";
+    std::string strValue;
+    FileMgr::SetProgramCompanyName(strCompanyName, strEnglishCompanyName);
+    strValue = FileMgr::GetProgramDir();
+    /******************************注册表创建 获取测试*****************************************/
 
 }
 

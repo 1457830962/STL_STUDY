@@ -151,7 +151,10 @@
     <ClCompile Include="FileMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Define.h" />
     <ClInclude Include="FileMgr.h" />
+    <ClInclude Include="RegKeyEx.h" />
+    <ClInclude Include="TypeTranslate.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

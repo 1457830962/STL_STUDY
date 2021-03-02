@@ -19,6 +19,12 @@
     <Filter Include="Header Files\FileUtil">
       <UniqueIdentifier>{89ea101d-be1c-4bf2-8559-4c087bfc0618}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Global">
+      <UniqueIdentifier>{4028b79c-b77e-4c5e-b555-761442fa9924}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Global">
+      <UniqueIdentifier>{834be038-c0c3-42be-837b-4d5c869969e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cpp11_Study.cpp">
@@ -31,6 +37,15 @@
   <ItemGroup>
     <ClInclude Include="FileMgr.h">
       <Filter>Header Files\FileUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="RegKeyEx.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Define.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeTranslate.h">
+      <Filter>Header Files\Global</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
