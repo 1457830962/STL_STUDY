@@ -148,6 +148,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cpp11_Study.cpp" />
+    <ClCompile Include="FileMgr.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileMgr.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

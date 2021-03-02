@@ -4,6 +4,7 @@
 #include <iostream>
 #include <io.h>
 #include <Windows.h>
+#include "FileMgr.h"
 using namespace std;
 
 int main()
@@ -34,16 +35,11 @@ int main()
 
     std::string strExpiryDateFile = "D:\\Github\\STUDY_EVERYDAY\\Cpp11_Study\\Cpp11_Study\\Cpp11_Study.cpp";
     //判断文件是否存在 
-    if (_access(strExpiryDateFile.c_str(), 0) == -1)
-    {
-        MessageBoxA(::GetActiveWindow(), "有效期文件不存在!", "提示", MB_OK | MB_ICONERROR);
-        return false;
-    }
-    else
-    {
+    if (FileMgr::FileExist(strExpiryDateFile))
         MessageBoxA(::GetActiveWindow(), "有效期文件存在!", "提示", MB_OK | MB_ICONERROR);
-        return false;
-    }
+    else
+        MessageBoxA(::GetActiveWindow(), "有效期文件不存在!", "提示", MB_OK | MB_ICONERROR);
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

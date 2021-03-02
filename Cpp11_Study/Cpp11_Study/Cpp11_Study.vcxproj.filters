@@ -13,10 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\FileUtil">
+      <UniqueIdentifier>{25b92d22-9122-4454-b0ca-9722e0b97480}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\FileUtil">
+      <UniqueIdentifier>{89ea101d-be1c-4bf2-8559-4c087bfc0618}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cpp11_Study.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="FileMgr.cpp">
+      <Filter>Source Files\FileUtil</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FileMgr.h">
+      <Filter>Header Files\FileUtil</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
