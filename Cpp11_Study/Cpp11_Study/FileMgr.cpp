@@ -29,6 +29,12 @@ bool FileMgr::SetProgramCompanyName(std::string& strCompanyName, std::string& st
 	else
 		key.CreateA(HKEY_CURRENT_USER, REG_PROGRAM_PATH);
 
+	if (key.OpenA(HKEY_LOCAL_MACHINE, REG_PROGRAM_PATH, KEY_WRITE) == ERROR_SUCCESS)
+	{
+	}
+	else
+		key.CreateA(HKEY_LOCAL_MACHINE, REG_PROGRAM_PATH);
+
 	std::string strRegKeyName;
 	if (key.OpenA(HKEY_CURRENT_USER, REG_PROGRAM_PATH, KEY_WRITE) == ERROR_SUCCESS &&
 		key.SetStringValueW(_T(REG_KEY_COMPANY_NAME), wstrCompanyName.c_str()) == ERROR_SUCCESS &&
@@ -68,14 +74,14 @@ std::string FileMgr::GetProgramDir()
 	char InstDir[1000];
 	ULONG nNameLen = sizeof(InstDir);
 	if (key.OpenA(HKEY_LOCAL_MACHINE, REG_PROGRAM_PATH, KEY_READ) == ERROR_SUCCESS &&
-		key.QueryStringValueA(REG_KEY_INSTALL_PATH, InstDir, &nNameLen) == ERROR_SUCCESS)
+		key.QueryStringValueA(REG_KEY_COMPANY_NAME, InstDir, &nNameLen) == ERROR_SUCCESS)
 	{
 		std::string strInstDir = InstDir;
 		strInstDir += "\\";
 		return strInstDir;
 	}
 	else if (key.OpenA(HKEY_LOCAL_MACHINE, REG_PROGRAM_PATH, KEY_READ | KEY_WOW64_32KEY) == ERROR_SUCCESS &&
-		key.QueryStringValueA(REG_KEY_INSTALL_PATH, InstDir, &nNameLen) == ERROR_SUCCESS)
+		key.QueryStringValueA(REG_KEY_COMPANY_NAME, InstDir, &nNameLen) == ERROR_SUCCESS)
 	{
 		std::string strInstDir = InstDir;
 		strInstDir += "\\";

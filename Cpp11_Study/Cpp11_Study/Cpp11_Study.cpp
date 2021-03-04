@@ -36,6 +36,7 @@ int main()
     std::string strValue;
     FileMgr::SetProgramCompanyName(strCompanyName, strEnglishCompanyName);
     strValue = FileMgr::GetProgramDir();
+    //:注意HKEY_LOCAL_MACHINE 中
     /******************************注册表创建 获取测试*****************************************/
 
 }
