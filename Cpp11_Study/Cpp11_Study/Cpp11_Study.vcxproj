@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="Define.h" />
     <ClInclude Include="FileMgr.h" />
+    <ClInclude Include="Global\SuperTimer.h" />
     <ClInclude Include="RegKeyEx.h" />
     <ClInclude Include="TypeTranslate.h" />
   </ItemGroup>

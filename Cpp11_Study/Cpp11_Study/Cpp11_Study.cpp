@@ -4,11 +4,17 @@
 #include <iostream>
 #include <io.h>
 #include <Windows.h>
+#include <string>
 #include "FileMgr.h"
+#include "./Global/SuperTimer.h"
 using namespace std;
 
 int main()
 {
+
+    CSuperTimer timer;
+    DOUBLE dTime = 0.0;
+    std::string strTime;
     //std::cout << "Hello World!\n";
     //default consstructor
     weak_ptr<string> wp;
@@ -38,6 +44,13 @@ int main()
     strValue = FileMgr::GetProgramDir();
     //:注意HKEY_LOCAL_MACHINE 中
     /******************************注册表创建 获取测试*****************************************/
+
+    /******************************测试耗时*****************************************/
+
+    dTime = timer.Lapse() * 1000.0;
+    strTime = std::to_string(dTime);
+
+    /******************************测试耗时*****************************************/
 
 }
 

@@ -47,5 +47,8 @@
     <ClInclude Include="TypeTranslate.h">
       <Filter>Header Files\Global</Filter>
     </ClInclude>
+    <ClInclude Include="Global\SuperTimer.h">
+      <Filter>Header Files\Global</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
