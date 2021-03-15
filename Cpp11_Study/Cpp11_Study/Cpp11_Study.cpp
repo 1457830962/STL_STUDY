@@ -42,6 +42,7 @@ int main()
     std::string strValue;
     FileMgr::SetProgramCompanyName(strCompanyName, strEnglishCompanyName);
     strValue = FileMgr::GetProgramDir();
+    OutputDebugString(L"输出调试信息123");
     //:注意HKEY_LOCAL_MACHINE 中
     /******************************注册表创建 获取测试*****************************************/
 
@@ -52,6 +53,12 @@ int main()
 
     /******************************测试耗时*****************************************/
 
+    /******************************测试内存泄漏问题*****************************************/
+    _CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
+    _CrtSetBreakAlloc(213);
+    char* pChars = new char[10];
+    //delete []pChars;
+    /******************************测试内存泄漏问题*****************************************/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
