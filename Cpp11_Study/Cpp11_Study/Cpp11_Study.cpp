@@ -31,7 +31,7 @@ int main()
     /******************************判断文件是否存在测试*****************************************/
     std::string strExpiryDateFile = "D:\\Github\\STUDY_EVERYDAY\\Cpp11_Study\\Cpp11_Study\\Cpp11_Study.cpp";
     //判断文件是否存在 
-    if (!FileMgr::FileExist(strExpiryDateFile))
+    if (!File::FileMgr::FileExist(strExpiryDateFile))
         MessageBoxA(::GetActiveWindow(), "有效期文件不存在!", "提示", MB_OK | MB_ICONERROR);
     /**********************************************************************************************/
 
@@ -40,8 +40,8 @@ int main()
     std::string strCompanyName = "英语";
     std::string strEnglishCompanyName = "english";
     std::string strValue;
-    FileMgr::SetProgramCompanyName(strCompanyName, strEnglishCompanyName);
-    strValue = FileMgr::GetProgramDir();
+    File::FileMgr::SetProgramCompanyName(strCompanyName, strEnglishCompanyName);
+    strValue = File::FileMgr::GetProgramDir();
     OutputDebugString(L"输出调试信息123");
     //:注意HKEY_LOCAL_MACHINE 中
     /******************************注册表创建 获取测试*****************************************/
@@ -55,9 +55,9 @@ int main()
 
     /******************************测试内存泄漏问题*****************************************/
     _CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
-    _CrtSetBreakAlloc(213);
+    //_CrtSetBreakAlloc(213);
     char* pChars = new char[10];
-    //delete []pChars;
+    delete []pChars;
     /******************************测试内存泄漏问题*****************************************/
 }
 
