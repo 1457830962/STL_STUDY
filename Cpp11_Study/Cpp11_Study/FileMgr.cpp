@@ -6,6 +6,19 @@
 #include "TypeTranslate.h"
 using namespace std;
 
+
+FileMgr::FileMgr()
+{
+	_CrtSetDbgFlag(_CrtSetDbgFlag(_CRTDBG_REPORT_FLAG) | _CRTDBG_LEAK_CHECK_DF);
+	_CrtSetBreakAlloc(209);
+}
+
+FileMgr::~FileMgr()
+{
+}
+
+
+
 bool FileMgr::FileExist(const std::string& strFile)
 {
 	bool b = true;
