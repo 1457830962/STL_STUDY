@@ -129,15 +129,15 @@ void CLoginDlg::OnSet()
 {
     int dt = CDPI::Scale(20.0);
     if (b_strech) {
-        for (int i = 0; rc.Height() - i >= 200; i += dt) {
+        for (int i = 0; rc.Height() - i >= CDPI::Scale(200.0); i += dt) {
             SetWindowPos(NULL, rc.left, rc.top, rc.Width(), rc.Height() - i, SWP_NOMOVE | SWP_SHOWWINDOW);
             Sleep(10);
         }
         b_strech = FALSE;
     }
     else {
-        for (int i = 0; i + 200 <= rc.Height(); i += dt) {
-            SetWindowPos(NULL, rc.left, rc.top, rc.Width(), i + 200, SWP_NOMOVE | SWP_SHOWWINDOW);
+        for (int i = 0; i + CDPI::Scale(200.0) <= rc.Height(); i += dt) {
+            SetWindowPos(NULL, rc.left, rc.top, rc.Width(), i + CDPI::Scale(200.0), SWP_NOMOVE | SWP_SHOWWINDOW);
             Sleep(10);
         }
         b_strech = TRUE;
