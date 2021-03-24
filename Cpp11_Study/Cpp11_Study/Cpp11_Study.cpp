@@ -29,7 +29,7 @@ int main()
     //这里p已经析构，其所指的对象也析构了，因此输出是0
 
     /******************************判断文件是否存在测试*****************************************/
-    std::string strExpiryDateFile = "D:\\Github\\STUDY_EVERYDAY\\Cpp11_Study\\Cpp11_Study\\Cpp11_Study.cpp";
+    std::string strExpiryDateFile = ".\\Cpp11_Study.cpp";
     //判断文件是否存在 
     if (!File::FileMgr::FileExist(strExpiryDateFile))
         MessageBoxA(::GetActiveWindow(), "有效期文件不存在!", "提示", MB_OK | MB_ICONERROR);
@@ -59,6 +59,13 @@ int main()
     char* pChars = new char[10];
     delete []pChars;
     /******************************测试内存泄漏问题*****************************************/
+
+    /******************************测试在output窗口输出日志信息*****************************************/
+    OutputDebugString(L"\r");
+    std::string str = "输出调试\n信测试换行\r测试回车，总共是三行";
+    //OutputDebugString(str.c_str());
+    File::OutputLogInfo::OutputDebugStringEx("DEBUG_INFO============================================ | %d %s\r\n", 5678, str.c_str());
+    /******************************测试在output窗口输出日志信息*****************************************/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
