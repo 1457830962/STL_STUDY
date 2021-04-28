@@ -92,6 +92,26 @@ int main()
     SmartPointer::TestHelper::fill(*vec_ptr, num);
     SmartPointer::TestHelper::display(*vec_ptr);
     /******************************测试智能指针*****************************************/
+
+
+
+
+
+    /******************************内存泄漏问题定位*****************************************/
+    //方法出处  https://www.cnblogs.com/skynet/archive/2011/02/20/1959162.html  
+    _CrtMemState s1, s2, s3;
+    _CrtMemCheckpoint(&s1);
+    char* pChars = new char[10];//此处发生内存泄漏，调试的输出窗口会有提示
+    //delete []pChars;
+
+    _CrtMemCheckpoint(&s2);
+    if (_CrtMemDifference(&s3, &s1, &s2))
+        _CrtMemDumpStatistics(&s3);
+
+    /******************************内存泄漏问题定位*****************************************/
+
+
+
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
