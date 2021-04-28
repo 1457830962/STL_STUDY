@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Global">
       <UniqueIdentifier>{834be038-c0c3-42be-837b-4d5c869969e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\C++11_Test">
+      <UniqueIdentifier>{06e04031-b919-42b2-9376-1b2bc95e4441}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cpp11_Study.cpp">
@@ -49,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="Global\SuperTimer.h">
       <Filter>Header Files\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="SmartPointer.h">
+      <Filter>Header Files\C++11_Test</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

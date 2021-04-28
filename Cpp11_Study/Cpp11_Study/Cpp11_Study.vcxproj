@@ -155,6 +155,7 @@
     <ClInclude Include="FileMgr.h" />
     <ClInclude Include="Global\SuperTimer.h" />
     <ClInclude Include="RegKeyEx.h" />
+    <ClInclude Include="SmartPointer.h" />
     <ClInclude Include="TypeTranslate.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

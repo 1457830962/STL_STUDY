@@ -7,6 +7,7 @@
 #include <string>
 #include "FileMgr.h"
 #include "./Global/SuperTimer.h"
+#include "SmartPointer.h"
 using namespace std;
 
 int main()
@@ -66,6 +67,31 @@ int main()
     //OutputDebugString(str.c_str());
     File::OutputLogInfo::OutputDebugStringEx("DEBUG_INFO============================================ | %d %s\r\n", 5678, str.c_str());
     /******************************测试在output窗口输出日志信息*****************************************/
+
+
+
+    /******************************测试智能指针*****************************************/
+    std::shared_ptr<std::string> p2 = make_shared<std::string>("hello11111111");//无需手动释放
+    std::cout <<"p2的值为:"<< *p2.get() << std::endl;
+    //delete p2.get();
+    if (p2 != nullptr)//判断是否为空
+        std::cout<< "is not empty!"<< std::endl;
+
+
+    //_CrtSetBreakAlloc(220);
+    std::string* pstr = new std::string("1111111111111");//需手动释放
+    std::cout << "pstr的值为:" << *pstr << std::endl;
+    if(pstr != nullptr)
+		delete pstr;
+
+    std::unique_ptr<std::vector<std::shared_ptr<SmartPointer::Test>>> vec_ptr;
+    vec_ptr = SmartPointer::TestHelper::make();
+    std::cout << "How many data points do you want to enter: ";
+    int num;
+    std::cin >> num;
+    SmartPointer::TestHelper::fill(*vec_ptr, num);
+    SmartPointer::TestHelper::display(*vec_ptr);
+    /******************************测试智能指针*****************************************/
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
