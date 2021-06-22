@@ -1,0 +1,17 @@
+[2021/06/22 周二 11:10:26.45] Start compile sequence 
+Used compile configuration is  
+1>------ Rebuild All started: Project: ZERO_CHECK, Configuration: Release x64 ------
+1>Checking Build System
+2>------ Rebuild All started: Project: Demo, Configuration: Release x64 ------
+2>Building Custom Rule C:/Users/admin/Desktop/CmakeTest/CMakeLists.txt
+2>main.cpp
+2>C:\Users\admin\Desktop\CmakeTest\main.cpp(1,1): warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
+2>Demo.vcxproj -> C:\Users\admin\Desktop\CmakeTest\Release\Demo.exe
+2>Done building project "Demo.vcxproj".
+3>------ Skipped Rebuild All: Project: ALL_BUILD, Configuration: Release x64 ------
+3>Project not selected to build for this solution configuration 
+========== Rebuild All: 2 succeeded, 0 failed, 1 skipped ==========
+
+"C:\Users\admin\Desktop\CmakeTest\Demo1.sln" compiled successful 
+[2021/06/22 周二 11:10:35.16] Finished compile sequence 
+[2021/06/22 周二 11:10:35.17] Finished compile sequence 

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Localstorage\STUDY_EVERYDAY_20200318\CallableObjectTest\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Localstorage\STUDY_EVERYDAY_20200318\CallableObjectTest\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{A1820C0A-DADF-3E8F-957F-867FF87C1793}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
